@@ -1,0 +1,3 @@
+username,password,role,name,email,phone,address,registration_date
+customer,scrypt:32768:8:1$jWWOSPgOyuK1uN06$708ed67f116ed11a9c8f5832fc5ce386b798cff59ed4172dbcc298ea6d824855defaf54aefd1fe7311661901015e999e84334d9a2dcf646aa54b98fc04b43247,customer,Sample Customer,customer@example.com,555-1234,123 Main St,2025-04-27 14:19:29
+manager,scrypt:32768:8:1$FuoJ0w6gQYR9r0e5$0710501e7c5dc74ae8cb986a6889687fc35cb0d432a9575dd37a456de314d33d9f9b5b6731042f764f16fe647849ba160b14d65bb495c84c329556438bab6526,manager,Sample Manager,manager@example.com,555-5678,456 Oak St,2025-04-27 14:19:29
