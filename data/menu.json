@@ -1,0 +1,352 @@
+{
+    "appetizers": [
+        {
+            "id": "a1",
+            "name": "Garlic Bread",
+            "price": 4.99,
+            "description": "Fresh baked Italian bread topped with garlic butter and herbs.",
+            "ingredients": [
+                "Italian bread",
+                "Garlic butter",
+                "Parsley",
+                "Oregano"
+            ],
+            "nutrition": {
+                "calories": 320,
+                "carbs": 40,
+                "protein": 6,
+                "fat": 15
+            },
+            "prepTime": "10 minutes"
+        },
+        {
+            "id": "a2",
+            "name": "Mozzarella Sticks",
+            "price": 6.99,
+            "description": "Golden-fried mozzarella sticks served with marinara sauce.",
+            "ingredients": [
+                "Mozzarella cheese",
+                "Breadcrumbs",
+                "Eggs",
+                "Italian herbs",
+                "Marinara sauce"
+            ],
+            "nutrition": {
+                "calories": 420,
+                "carbs": 30,
+                "protein": 20,
+                "fat": 25
+            },
+            "prepTime": "15 minutes"
+        },
+        {
+            "id": "a3",
+            "name": "Soup of the Day",
+            "price": 5.99,
+            "description": "Fresh homemade soup prepared daily. Ask our chatbot for today's special!",
+            "ingredients": [
+                "Daily fresh ingredients",
+                "Chef's selection of herbs and spices"
+            ],
+            "nutrition": {
+                "calories": 220,
+                "carbs": 25,
+                "protein": 10,
+                "fat": 8
+            },
+            "prepTime": "20 minutes"
+        },
+        {
+            "id": "a4",
+            "name": "Bruschetta",
+            "price": 7.99,
+            "description": "Toasted Italian bread topped with fresh tomatoes, basil, garlic, and olive oil.",
+            "ingredients": [
+                "Italian bread",
+                "Tomatoes",
+                "Fresh basil",
+                "Garlic",
+                "Extra virgin olive oil",
+                "Balsamic glaze"
+            ],
+            "nutrition": {
+                "calories": 280,
+                "carbs": 35,
+                "protein": 5,
+                "fat": 12
+            },
+            "prepTime": "15 minutes"
+        }
+    ],
+    "main_courses": [
+        {
+            "id": "m1",
+            "name": "Margherita Pizza",
+            "price": 12.99,
+            "description": "Classic pizza with tomato sauce, fresh mozzarella, and basil on our house-made dough.",
+            "ingredients": [
+                "House-made dough",
+                "San Marzano tomato sauce",
+                "Fresh mozzarella",
+                "Fresh basil",
+                "Extra virgin olive oil"
+            ],
+            "nutrition": {
+                "calories": 850,
+                "carbs": 90,
+                "protein": 35,
+                "fat": 35
+            },
+            "prepTime": "20 minutes"
+        },
+        {
+            "id": "m2",
+            "name": "Spaghetti Carbonara",
+            "price": 14.99,
+            "description": "Al dente spaghetti tossed with a creamy sauce of eggs, pecorino cheese, pancetta, and black pepper.",
+            "ingredients": [
+                "Spaghetti",
+                "Eggs",
+                "Pecorino Romano cheese",
+                "Pancetta",
+                "Black pepper",
+                "Parsley"
+            ],
+            "nutrition": {
+                "calories": 950,
+                "carbs": 85,
+                "protein": 40,
+                "fat": 45
+            },
+            "prepTime": "25 minutes"
+        },
+        {
+            "id": "m3",
+            "name": "Chicken Alfredo",
+            "price": 15.99,
+            "description": "Fettuccine pasta in a rich, creamy Alfredo sauce with grilled chicken breast.",
+            "ingredients": [
+                "Fettuccine pasta",
+                "Grilled chicken breast",
+                "Heavy cream",
+                "Parmesan cheese",
+                "Butter",
+                "Garlic",
+                "Parsley"
+            ],
+            "nutrition": {
+                "calories": 1050,
+                "carbs": 80,
+                "protein": 55,
+                "fat": 50
+            },
+            "prepTime": "30 minutes"
+        },
+        {
+            "id": "m4",
+            "name": "Grilled Salmon",
+            "price": 18.99,
+            "description": "Fresh Atlantic salmon fillet, grilled and served with seasonal vegetables and lemon herb butter.",
+            "ingredients": [
+                "Atlantic salmon",
+                "Seasonal vegetables",
+                "Lemon",
+                "Butter",
+                "Fresh herbs",
+                "Olive oil"
+            ],
+            "nutrition": {
+                "calories": 620,
+                "carbs": 15,
+                "protein": 45,
+                "fat": 40
+            },
+            "prepTime": "25 minutes"
+        },
+        {
+            "id": "m5",
+            "name": "Vegetable Stir Fry",
+            "price": 13.99,
+            "description": "Colorful medley of fresh vegetables stir-fried in a savory sauce, served over steamed rice.",
+            "ingredients": [
+                "Broccoli",
+                "Bell peppers",
+                "Carrots",
+                "Snap peas",
+                "Mushrooms",
+                "Onions",
+                "Ginger",
+                "Garlic",
+                "Soy sauce",
+                "Jasmine rice"
+            ],
+            "nutrition": {
+                "calories": 450,
+                "carbs": 65,
+                "protein": 12,
+                "fat": 15
+            },
+            "prepTime": "20 minutes"
+        }
+    ],
+    "desserts": [
+        {
+            "id": "d1",
+            "name": "Tiramisu",
+            "price": 6.99,
+            "description": "Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream.",
+            "ingredients": [
+                "Ladyfingers",
+                "Espresso coffee",
+                "Mascarpone cheese",
+                "Heavy cream",
+                "Eggs",
+                "Sugar",
+                "Cocoa powder"
+            ],
+            "nutrition": {
+                "calories": 380,
+                "carbs": 35,
+                "protein": 7,
+                "fat": 22
+            },
+            "prepTime": "Prepared daily"
+        },
+        {
+            "id": "d2",
+            "name": "Chocolate Cake",
+            "price": 5.99,
+            "description": "Rich, moist chocolate cake with a smooth ganache topping.",
+            "ingredients": [
+                "Chocolate",
+                "Flour",
+                "Sugar",
+                "Eggs",
+                "Butter",
+                "Vanilla extract",
+                "Heavy cream"
+            ],
+            "nutrition": {
+                "calories": 450,
+                "carbs": 50,
+                "protein": 6,
+                "fat": 25
+            },
+            "prepTime": "Prepared daily"
+        },
+        {
+            "id": "d3",
+            "name": "Cheesecake",
+            "price": 6.99,
+            "description": "Creamy New York style cheesecake with a graham cracker crust and berry compote.",
+            "ingredients": [
+                "Cream cheese",
+                "Sugar",
+                "Eggs",
+                "Vanilla extract",
+                "Graham crackers",
+                "Butter",
+                "Mixed berries"
+            ],
+            "nutrition": {
+                "calories": 480,
+                "carbs": 40,
+                "protein": 8,
+                "fat": 30
+            },
+            "prepTime": "Prepared daily"
+        },
+        {
+            "id": "d4",
+            "name": "Ice Cream Sundae",
+            "price": 4.99,
+            "description": "Vanilla ice cream topped with chocolate sauce, whipped cream, and a cherry.",
+            "ingredients": [
+                "Vanilla ice cream",
+                "Chocolate sauce",
+                "Whipped cream",
+                "Maraschino cherry",
+                "Chopped nuts"
+            ],
+            "nutrition": {
+                "calories": 350,
+                "carbs": 45,
+                "protein": 5,
+                "fat": 18
+            },
+            "prepTime": "5 minutes"
+        }
+    ],
+    "drinks": [
+        {
+            "id": "dr1",
+            "name": "Soda",
+            "price": 2.49,
+            "description": "Choice of Coca-Cola, Diet Coke, Sprite, or Fanta.",
+            "ingredients": [
+                "Carbonated water",
+                "Sweeteners",
+                "Natural flavors"
+            ],
+            "nutrition": {
+                "calories": 140,
+                "carbs": 39,
+                "protein": 0,
+                "fat": 0
+            },
+            "prepTime": "Served immediately"
+        },
+        {
+            "id": "dr2",
+            "name": "Iced Tea",
+            "price": 2.99,
+            "description": "Freshly brewed unsweetened or sweet tea with lemon.",
+            "ingredients": [
+                "Black tea",
+                "Optional: sugar",
+                "Lemon"
+            ],
+            "nutrition": {
+                "calories": 0,
+                "carbs": 0,
+                "protein": 0,
+                "fat": 0
+            },
+            "prepTime": "Served immediately"
+        },
+        {
+            "id": "dr3",
+            "name": "Coffee",
+            "price": 3.49,
+            "description": "Premium Italian coffee, available as espresso, americano, or cappuccino.",
+            "ingredients": [
+                "Freshly ground coffee beans",
+                "Optional: milk, sugar"
+            ],
+            "nutrition": {
+                "calories": 5,
+                "carbs": 0,
+                "protein": 0,
+                "fat": 0
+            },
+            "prepTime": "5 minutes"
+        },
+        {
+            "id": "dr4",
+            "name": "House Wine (Glass)",
+            "price": 7.99,
+            "description": "Selection of red or white house wines. Ask our chatbot for current offerings.",
+            "ingredients": [
+                "Grapes",
+                "Natural fermentation"
+            ],
+            "nutrition": {
+                "calories": 120,
+                "carbs": 4,
+                "protein": 0,
+                "fat": 0
+            },
+            "prepTime": "Served immediately"
+        }
+    ]
+}
