@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Italia - Manager Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #8d1c3d;
+            --secondary-color: #f9f3e5;
+            --accent-color: #3c8d2f;
+            --text-color: #333;
+            --light-text: #f9f3e5;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+            gap: 1rem;
+        }
+        
+        .logout-button {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .logout-button:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .stat-title {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .stat-card.highlight {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .stat-card.highlight .stat-title {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .recent-orders {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+        
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .order-table th,
+        .order-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-table th {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .view-all-link {
+            display: block;
+            text-align: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        
+        .view-all-link:hover {
+            text-decoration: underline;
+        }
+        
+        .dashboard-actions {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .action-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .action-header {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .action-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .action-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .action-button:hover {
+            background-color: #7a1834;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-actions {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/static/images/logo.png" alt="Logo" onerror="this.src='/static/images/placeholder.png'"> Bella Italia
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('manager_dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('manager_orders') }}">Orders</a></li>
+                <li><a href="{{ url_for('manager_sales') }}">Sales</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span>Welcome, {{ username }}</span>
+            <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        </div>
+    </header>
+    
+    <main>
+        <h1 class="page-title">Manager Dashboard</h1>
+        
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <span class="stat-value">{{ total_orders }}</span>
+                <span class="stat-title">Total Orders</span>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-value">{{ pending_orders }}</span>
+                <span class="stat-title">Pending Orders</span>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-value">{{ completed_orders }}</span>
+                <span class="stat-title">Completed Orders</span>
+            </div>
+            
+            <div class="stat-card highlight">
+                <span class="stat-value">${{ "%.2f"|format(total_revenue) }}</span>
+                <span class="stat-title">Total Revenue</span>
+            </div>
+        </div>
+        
+        <div class="recent-orders">
+            <h2 class="section-title">Recent Orders</h2>
+            
+            {% if pending_orders > 0 %}
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in recent_orders %}
+                    <tr>
+                        <td>{{ order.order_id }}</td>
+                        <td>{{ order.date_time }}</td>
+                        <td>{{ order.username }}</td>
+                        <td>${{ "%.2f"|format(order.total_price) }}</td>
+                        <td>
+                            <span class="status-badge status-{{ order.status }}">
+                                {{ order.status|title }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No pending orders at the moment.</p>
+            {% endif %}
+            
+            <a href="{{ url_for('manager_orders') }}" class="view-all-link">View All Orders</a>
+        </div>
+        
+        <div class="dashboard-actions">
+            <div class="action-card">
+                <div class="action-header">Manage Orders</div>
+                <div class="action-body">
+                    <p>View and update the status of customer orders.</p>
+                    <a href="{{ url_for('manager_orders') }}" class="action-button">Go to Orders</a>
+                </div>
+            </div>
+            
+            <div class="action-card">
+                <div class="action-header">Sales Analysis</div>
+                <div class="action-body">
+                    <p>View sales data and forecasts for future planning.</p>
+                    <a href="{{ url_for('manager_sales') }}" class="action-button">View Sales</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
