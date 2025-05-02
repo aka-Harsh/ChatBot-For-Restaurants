@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Italia - Order Management</title>
+    <style>
+        :root {
+            --primary-color: #8d1c3d;
+            --secondary-color: #f9f3e5;
+            --accent-color: #3c8d2f;
+            --text-color: #333;
+            --light-text: #f9f3e5;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+            gap: 1rem;
+        }
+        
+        .logout-button {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .logout-button:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        
+        .orders-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .order-filters {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .filter-button {
+            background-color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .filter-button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .order-table th,
+        .order-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-table th {
+            font-weight: 600;
+            color: #666;
+            background-color: #f9f9f9;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .action-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .action-button:hover {
+            background-color: #7a1834;
+        }
+        
+        .order-details {
+            border-top: 1px solid #ddd;
+            background-color: #f9f9f9;
+            padding: 1rem;
+            display: none;
+        }
+        
+        .order-details.visible {
+            display: block;
+        }
+        
+        .order-items {
+            margin-bottom: 1rem;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-total {
+            font-weight: bold;
+            text-align: right;
+            padding-top: 0.5rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .status-form {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .status-select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .expand-button {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .expand-button:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .flash-messages {
+            margin-bottom: 1rem;
+        }
+        
+        .flash-message {
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .no-orders {
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .order-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/static/images/logo.png" alt="Logo" onerror="this.src='/static/images/placeholder.png'"> Bella Italia
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('manager_dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('manager_orders') }}">Orders</a></li>
+                <li><a href="{{ url_for('manager_sales') }}">Sales</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span>Welcome, {{ username }}</span>
+            <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        </div>
+    </header>
+    
+    <main>
+        <h1 class="page-title">Order Management</h1>
+        
+        {% if get_flashed_messages() %}
+        <div class="flash-messages">
+            {% for message in get_flashed_messages() %}
+            <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="orders-container">
+            <div class="order-filters">
+                <button class="filter-button active" data-filter="all">All Orders</button>
+                <button class="filter-button" data-filter="pending">Pending</button>
+                <button class="filter-button" data-filter="completed">Completed</button>
+            </div>
+            
+            {% if orders %}
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr class="order-row" data-status="{{ order.status }}">
+                        <td>{{ order.order_id }}</td>
+                        <td>{{ order.date_time }}</td>
+                        <td>{{ order.username }}</td>
+                        <td>${{ "%.2f"|format(order.total_price|float) }}</td>
+                        <td>
+                            <span class="status-badge status-{{ order.status }}">
+                                {{ order.status|title }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="expand-button" data-order-id="{{ order.order_id }}">Details</button>
+                        </td>
+                    </tr>
+                    <tr class="order-details-row" id="details-{{ order.order_id }}">
+                        <td colspan="6">
+                            <div class="order-details">
+                                <h3>Order Items</h3>
+                                <div class="order-items">
+                                    {% if order.items is iterable and order.items is not string %}
+                                        {% for item in order.items %}
+                                        <div class="order-item">
+                                            <span>{{ item.name }}</span>
+                                            <span>${{ "%.2f"|format(item.price|float) }}</span>
+                                        </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="order-item">
+                                            <span>Order details not available</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="order-total">
+                                    Total: ${{ "%.2f"|format(order.total_price|float) }}
+                                </div>
+                                
+                                <form class="status-form" method="POST" action="{{ url_for('update_order_status_route') }}">
+                                    <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                                    <label for="status-{{ order.order_id }}">Change Status:</label>
+                                    <select name="status" id="status-{{ order.order_id }}" class="status-select">
+                                        <option value="pending" {% if order.status == 'pending' %}selected{% endif %}>Pending</option>
+                                        <option value="completed" {% if order.status == 'completed' %}selected{% endif %}>Completed</option>
+                                    </select>
+                                    <button type="submit" class="action-button">Update</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="no-orders">
+                <h2>No orders yet</h2>
+                <p>There are no orders in the system yet.</p>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+    
+    <script>
+        // Toggle order details
+        document.addEventListener('DOMContentLoaded', function() {
+            const expandButtons = document.querySelectorAll('.expand-button');
+            
+            expandButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-order-id');
+                    const detailsRow = document.getElementById(`details-${orderId}`);
+                    const detailsDiv = detailsRow.querySelector('.order-details');
+                    
+                    if (detailsDiv.classList.contains('visible')) {
+                        detailsDiv.classList.remove('visible');
+                    } else {
+                        detailsDiv.classList.add('visible');
+                    }
+                });
+            });
+            
+            // Order filters
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const orderRows = document.querySelectorAll('.order-row');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Filter the orders
+                    orderRows.forEach(row => {
+                        const status = row.getAttribute('data-status');
+                        const detailsRow = row.nextElementSibling;
+                        
+                        if (filter === 'all' || status === filter) {
+                            row.style.display = 'table-row';
+                            detailsRow.style.display = 'table-row';
+                        } else {
+                            row.style.display = 'none';
+                            detailsRow.style.display = 'none';
+                            // Hide details if hidden
+                            detailsRow.querySelector('.order-details').classList.remove('visible');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
