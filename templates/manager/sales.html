@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Italia - Sales Analytics</title>
+    <style>
+        :root {
+            --primary-color: #8d1c3d;
+            --secondary-color: #f9f3e5;
+            --accent-color: #3c8d2f;
+            --text-color: #333;
+            --light-text: #f9f3e5;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+            gap: 1rem;
+        }
+        
+        .logout-button {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .logout-button:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .chart-header {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .chart-body {
+            padding: 1.5rem;
+            height: 300px;
+            position: relative;
+        }
+        
+        .forecast-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .forecast-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .forecast-title {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .forecast-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .forecast-description {
+            color: #666;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .report-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+        
+        .disclaimer {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .no-data {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #666;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/static/images/logo.png" alt="Logo" onerror="this.src='/static/images/placeholder.png'"> Bella Italia
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('manager_dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('manager_orders') }}">Orders</a></li>
+                <li><a href="{{ url_for('manager_sales') }}">Sales</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span>Welcome, {{ username }}</span>
+            <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        </div>
+    </header>
+    
+    <main>
+        <h1 class="page-title">Sales Analytics</h1>
+        
+        <div class="forecast-cards">
+            <div class="forecast-card">
+                <h3 class="forecast-title">Weekly Forecast</h3>
+                <div class="forecast-value">${{ "%.2f"|format(weekly_forecast or 0) }}</div>
+                <p class="forecast-description">Projected revenue for the upcoming week</p>
+            </div>
+            
+            <div class="forecast-card">
+                <h3 class="forecast-title">Monthly Forecast</h3>
+                <div class="forecast-value">${{ "%.2f"|format(monthly_forecast or 0) }}</div>
+                <p class="forecast-description">Projected revenue for the upcoming month</p>
+            </div>
+        </div>
+        
+        <div class="charts-container">
+            <div class="chart-card">
+                <div class="chart-header">Weekly Sales</div>
+                <div class="chart-body">
+                    {% if weeks and weeks|length > 0 and weekly_values and weekly_values|length > 0 %}
+                    <canvas id="weeklyChart"></canvas>
+                    {% else %}
+                    <div class="no-data">No weekly sales data available</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <div class="chart-header">Monthly Sales</div>
+                <div class="chart-body">
+                    {% if months and months|length > 0 and monthly_values and monthly_values|length > 0 %}
+                    <canvas id="monthlyChart"></canvas>
+                    {% else %}
+                    <div class="no-data">No monthly sales data available</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="report-section">
+            <h2 class="section-title">Sales Analysis</h2>
+            <p>This report provides an overview of your restaurant's sales performance and forecasts for future planning.</p>
+            
+            {% if weeks and weeks|length > 0 and weekly_values and weekly_values|length > 0 and months and months|length > 0 and monthly_values and monthly_values|length > 0 %}
+            <p>
+                Based on your recent sales data, we're forecasting a weekly revenue of <strong>${{ "%.2f"|format(weekly_forecast or 0) }}</strong>
+                and a monthly revenue of <strong>${{ "%.2f"|format(monthly_forecast or 0) }}</strong>.
+                
+                {% if weekly_forecast and weekly_values and weekly_values|length > 0 and weekly_values[-1] > 0 %}
+                <br>Your weekly sales are projected to increase by {{ "%.1f"|format(((weekly_forecast - weekly_values[-1]) / weekly_values[-1] * 100) if weekly_values[-1] > 0 else 0) }}% compared to last week.
+                {% endif %}
+                
+                {% if monthly_forecast and monthly_values and monthly_values|length > 0 and monthly_values[-1] > 0 %}
+                <br>Your monthly sales are projected to increase by {{ "%.1f"|format(((monthly_forecast - monthly_values[-1]) / monthly_values[-1] * 100) if monthly_values[-1] > 0 else 0) }}% compared to last month.
+                {% endif %}
+            </p>
+            {% else %}
+            <p>
+                Not enough historical data is available to generate a detailed analysis. 
+                Continue collecting sales data to receive more accurate forecasts and insights.
+            </p>
+            {% endif %}
+        </div>
+        
+        <p class="disclaimer">
+            Note: Forecasts are based on historical data and simple trend analysis. 
+            Actual results may vary due to numerous factors including seasonality, marketing efforts, and external events.
+        </p>
+    </main>
+    
+    <!-- Pass data to external JS file -->
+    <script>
+        // Data from the server to be used by the charts script
+        var chartData = {
+            weeks: {{ weeks|tojson|default('[]') }},
+            weeklyValues: {{ weekly_values|tojson|default('[]') }},
+            months: {{ months|tojson|default('[]') }},
+            monthlyValues: {{ monthly_values|tojson|default('[]') }}
+        };
+    </script>
+    
+    <!-- Include the external chart script -->
+    <script src="{{ url_for('static', filename='js/sales-charts.js') }}"></script>
+</body>
+</html>
