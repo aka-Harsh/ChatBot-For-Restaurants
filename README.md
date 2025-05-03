@@ -115,3 +115,19 @@ The system also handles typos and synonyms intelligently.
 ---
 
 ## 🔭 Project Outlook
+
+
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/62b0ba50-600a-4701-8333-5ea9eb10ceea" width="45%" height="600px" />
+  <img src="https://github.com/user-attachments/assets/36c031ef-01dd-4e93-9e3c-4a5c4595b34b" width="45%" height="600px" />
+</p>
+
+![Image](https://github.com/user-attachments/assets/cfc053c4-3f9e-4c18-a520-900a3d72c0d2)
+![Image](https://github.com/user-attachments/assets/59a9867c-ba07-4063-9820-443b622fcae9)
+![Image](https://github.com/user-attachments/assets/1a864ec8-7355-4983-a176-e271ca850b53)
+![Image](https://github.com/user-attachments/assets/9088316f-269a-4404-bdb9-0476d914c278)
+![Image](https://github.com/user-attachments/assets/e22c885d-ffc7-44bd-ab7a-c19f948f7646)
+![Image](https://github.com/user-attachments/assets/cd1dae4e-2eca-4b8d-88bc-9a541e080185)
+![Image](https://github.com/user-attachments/assets/cfa5ef5b-768a-47c4-939f-d9fafdfd44ee)
+![Image](https://github.com/user-attachments/assets/d44fb4a4-abd3-4db6-a023-07086a6e26ea)
+![Image](https://github.com/user-attachments/assets/b839cce1-4ebd-42c1-a613-dfda152661d4)
